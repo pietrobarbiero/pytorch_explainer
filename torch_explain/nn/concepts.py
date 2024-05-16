@@ -68,6 +68,7 @@ class ConceptLinearLayer(torch.nn.Module):
             # p, n, z = weight_attn[:, :, :, 0], weight_attn[:, :, :, 1], weight_attn[:, :, :, 2]
             # weight_attn = (p - n) * (1-z)
 
+        # sum of w_i*c_i + b for all concepts c_i
         logits = (c.unsqueeze(-1) * weight_attn).sum(dim=1).float()
         if self.bias:
             bias_attn = self.pos_bias_nn(x.mean(dim=1)) - self.neg_bias_nn(x.mean(dim=1))

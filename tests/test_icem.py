@@ -31,8 +31,8 @@ def train_concept_bottleneck_model(x, c, y, embedding_size=10, concept_names=Non
     model = torch.nn.Sequential(encoder, concept_embedder, task_predictor)
 
     optimizer = torch.optim.AdamW(model.parameters(), lr=0.01)
-    loss_form_c = torch.nn.BCELoss()
-    loss_form_y = torch.nn.BCELoss()
+    loss_form_c = torch.nn.BCEWithLogitsLoss()
+    loss_form_y = torch.nn.BCEWithLogitsLoss()
     model.train()
     for epoch in range(501):
         optimizer.zero_grad()
